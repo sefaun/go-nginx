@@ -5,23 +5,25 @@ import (
 	"io"
 	"log"
 	"net"
+	"spider-server/configuration"
 )
 
 var (
 	counter = 0
 	//TODO: configuration
-	listen_address = "localhost:8080"
+	listen_address = []string{}
 
 	//TODO: configuration
-	server = []string{
-		"localhost:5000",
-		"localhost:5001",
-		"localhost:5002",
-	}
+	server = []string{}
 )
 
 func main() {
-	listener, err := net.Listen("tcp", listen_address)
+
+	config := &configuration.Configuration{}
+
+	listen_address, server = config.ReadConfiguration()
+
+	listener, err := net.Listen("tcp", listen_address[0])
 
 	if err != nil {
 		log.Fatal("Failed to Listen: %s", err)
