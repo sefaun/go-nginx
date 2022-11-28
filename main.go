@@ -10,17 +10,12 @@ import (
 
 var (
 	counter = 0
-	//TODO: configuration
 	listen_address = []string{}
-
-	//TODO: configuration
 	server = []string{}
 )
 
 func main() {
-
 	config := &configuration.Configuration{}
-
 	listen_address, server = config.ReadConfiguration()
 
 	listener, err := net.Listen("tcp", listen_address[0])
@@ -39,7 +34,6 @@ func main() {
 		}
 
 		backend := chooseBackend()
-
 		fmt.Printf("Backend= %s\n", backend)
 
 		go func() {
